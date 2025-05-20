@@ -11,6 +11,9 @@ from fastapi import FastAPI, File, UploadFile, Form, Body, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
+from dotenv import load_dotenv
+load_dotenv()  
+
 app = FastAPI()
 
 app.add_middleware(
@@ -42,8 +45,8 @@ logger.info("Query Result:")
 logger.info("COLLECTION_NAME: " + COLLECTION_NAME)
 
 # AstraDB constant configuration
-ASTRA_DB_API_ENDPOINT = "https://***********.apps.astra.datastax.com"
-ASTRA_DB_APPLICATION_TOKEN = "***********"
+ASTRA_DB_API_ENDPOINT = os.getenv("ASTRA_DB_API_ENDPOINT")
+ASTRA_DB_APPLICATION_TOKEN = os.getenv("ASTRA_DB_APPLICATION_TOKEN")
 
 # ----------------- Download nltk Data -----------------
 nltk.download('punkt', quiet=True)
@@ -55,14 +58,14 @@ overlap = 1       # Number of overlapping sentences
 top_k_docs = 10   # Number of documents to return during retrieval
 
 # ----------------- Environment Variables Configuration -----------------
-os.environ["OPENAI_API_KEY"] = "sk-proj-**********************"
-os.environ["ANTHROPIC_API_KEY"] = "sk-ant-api03-***********-***********"
-os.environ['AWS_ACCESS_KEY_ID'] = "***********"
-os.environ['AWS_SECRET_ACCESS_KEY'] = "***********+"
-os.environ['AWS_DEFAULT_REGION'] = "us-east-1"
-os.environ["GOOGLE_API_KEY"] = "***********"
-os.environ["XAI_API_KEY"] = "xai-***********"
-os.environ["DEEPSEEK_API_KEY"] = "sk-***********"
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+os.environ["ANTHROPIC_API_KEY"] = os.getenv("ANTHROPIC_API_KEY")
+os.environ['AWS_ACCESS_KEY_ID'] = os.getenv("AWS_ACCESS_KEY_ID")
+os.environ['AWS_SECRET_ACCESS_KEY'] = os.getenv("AWS_SECRET_ACCESS_KEY")
+os.environ['AWS_DEFAULT_REGION'] = os.getenv("AWS_DEFAULT_REGION")
+os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
+os.environ["XAI_API_KEY"] = os.getenv("XAI_API_KEY")
+os.environ["DEEPSEEK_API_KEY"] = os.getenv("DEEPSEEK_API_KEY")
 
 # ----------------- Model Configuration -----------------
 CONFIG = {
